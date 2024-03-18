@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "test-task-inlyit"
+version = "0.1.0"
+description = ""
+authors = ["79146 <pysenkon@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.110.0"
+redis = "^5.0.3"
+alembic = "^1.13.1"
+sqlalchemy = "^2.0.28"
+asyncpg = "^0.29.0"
+pydantic-settings = "^2.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.2"
+uvicorn = "^0.28.0"
+black = "^24.3.0"
+
+
+[tool.isort]
+profile = "black"
+skip = ["READMI.md"]
+skip_glob = ["alembic/*", "**/__init__.py"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
