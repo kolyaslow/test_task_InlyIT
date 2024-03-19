@@ -22,7 +22,7 @@ class User(Base):
         unique=True,
         index=True,
     )
-    password: Mapped[str]
+    password: Mapped[bytes]
     is_superuser: Mapped[bool] = mapped_column(
         default=False,
     )

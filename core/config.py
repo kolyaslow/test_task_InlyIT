@@ -3,6 +3,9 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+import aioredis
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(filename)s - %(message)s",
@@ -34,13 +37,17 @@ class DbSettings(BaseSettingsApp):
         url: str = (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
-        loger.debug(f"url бд: {url}")
+        loger.debug(f"url db: {url}")
         return url
 
 
 class RedisSettings(BaseSettingsApp):
     REDIS_HOST: str
     REDIS_PORT: str
+
+    @property
+    def client_redis(self):
+        return aioredis.from_url(f"redis://{self.REDIS_HOST}", port=self.REDIS_PORT)
 
 
 class Settings(BaseSettings):
