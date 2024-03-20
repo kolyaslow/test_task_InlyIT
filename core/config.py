@@ -1,10 +1,9 @@
 import logging
 from pathlib import Path
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
 import aioredis
-
+from aioredis.exceptions import ConnectionError
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 logging.basicConfig(
     level=logging.INFO,
@@ -34,9 +33,7 @@ class DbSettings(BaseSettingsApp):
 
     @property
     def url(self):
-        url: str = (
-            f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
+        url: str = f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         loger.debug(f"url db: {url}")
         return url
 
@@ -47,7 +44,13 @@ class RedisSettings(BaseSettingsApp):
 
     @property
     def client_redis(self):
-        return aioredis.from_url(f"redis://{self.REDIS_HOST}", port=self.REDIS_PORT)
+        try:
+            client = aioredis.from_url(
+                f"redis://{self.REDIS_HOST}", port=self.REDIS_PORT
+            )
+            return client
+        except ConnectionError as e:
+            logging.critical(f"Redis error: {e.args}")
 
 
 class Settings(BaseSettings):
