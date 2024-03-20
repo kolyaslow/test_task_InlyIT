@@ -9,7 +9,7 @@ from core.models import User
 from . import crud as auth_crud
 from .constants import COOKIE_SESSION_ID_KEY
 from .schemas import AuthUser
-from .security import validate_password
+from .utils import validate_password
 
 logging = logging.getLogger(__name__)
 
@@ -17,6 +17,7 @@ logging = logging.getLogger(__name__)
 async def check_unique_user_name(
     user_data: AuthUser, session: AsyncSession = Depends(db_helper.session_dependency)
 ) -> AuthUser:
+
     if await auth_crud.get_user_by_user_name(
         user_name=user_data.user_name,
         session=session,

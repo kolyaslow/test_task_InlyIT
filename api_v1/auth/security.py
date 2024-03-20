@@ -18,16 +18,6 @@ def hash_password(
     return bcrypt.hashpw(pwd_bytes, salt)
 
 
-def validate_password(
-    password: str,
-    hashed_password: bytes,
-) -> bool:
-    return bcrypt.checkpw(
-        password=password.encode(),
-        hashed_password=hashed_password,
-    )
-
-
 class AccessRights:
 
     _FORBIDDEN_EXCEPTION = HTTPException(

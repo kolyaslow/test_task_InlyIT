@@ -1,11 +1,22 @@
 import uuid
 
+import bcrypt
 from fastapi import Response
 
 from core.config import settings
 
 from .constants import COOKIE_SESSION_ID_KEY
 from .redis import delete_cache_user_cookie, remember_user_cookie
+
+
+def validate_password(
+    password: str,
+    hashed_password: bytes,
+) -> bool:
+    return bcrypt.checkpw(
+        password=password.encode(),
+        hashed_password=hashed_password,
+    )
 
 
 def generate_session_id() -> str:
