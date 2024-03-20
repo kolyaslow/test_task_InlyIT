@@ -5,8 +5,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.models import User
 
-from . import utils
 from .schemas import AuthUser, ShowUser
+from .security import hash_password
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ async def create_user(
     Создание пользователя в БД, с кешированным паролем.
     Возвращает пользователя без пароля.
     """
-    user_data.password = utils.hash_password(user_data.password)
+    user_data.password = hash_password(user_data.password)
     user = User(**user_data.model_dump())
     session.add(user)
     await session.commit()

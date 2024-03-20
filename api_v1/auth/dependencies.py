@@ -1,15 +1,15 @@
 import logging
 
-from fastapi import Cookie, Depends, HTTPException, Request, Response, status
+from fastapi import Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.db_helper import db_helper
 from core.models import User
 
 from . import crud as auth_crud
-from . import utils
 from .constants import COOKIE_SESSION_ID_KEY
 from .schemas import AuthUser
+from .security import validate_password
 
 logging = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ async def verification_user(
     session: AsyncSession = Depends(db_helper.session_dependency),
 ) -> User:
     """
-    Проверка пользователя на совпадения логина и пароля и на то, что он не забанин
+    Проверка пользователя на совпадения логина и пароля и на то, что он не забанин.
     """
     unauthed_exc = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -49,7 +49,7 @@ async def verification_user(
     if not user:
         raise unauthed_exc
 
-    if not utils.validate_password(
+    if not validate_password(
         password=user_data.password,
         hashed_password=user.password,
     ):
