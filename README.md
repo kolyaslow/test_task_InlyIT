@@ -4,6 +4,7 @@
 
 1. [Используемый стек технологий](#используемый-стек-технологий)
 2. [Запуск](#запуск)
+3. [Задание](#задание)
 4. [Документация](#Документация)
 5. [Автор](#автор)
 
@@ -31,6 +32,28 @@ $ sudo docker compose up
 ```
 http://127.0.0.1:8008/docs#/
 ```
+
+## Задание
+- Возможности пользователя
+  - Регистрация: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/auth/views.py#L16)
+  - Вход в систему: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/auth/views.py#L34)
+  - Размещение объявления: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/auth/views.py#L34)
+  - Просмотр списка объявлений : [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/announcement/views.py#L41)
+  - Детальный просмотр одного объявления : [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/announcement/views.py#L70)
+  - Удаление своего объявления: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/announcement/views.py#L83)
+						
+- Возможности администратора:
+  - Удаление комментариев в любой группе объявлений: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/admin_api/views.py#L33)
+  - Назначение пользователя администратором: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/admin_api/views.py#L21)
+
+- Дополнительный функционал, необязателен, но будет плюсом:
+  - Серверная пагинация: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/announcement/views.py#L43)
+  - Фильтрация объявлений: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/announcement/views.py#L42)
+  - Жалоба на объявление: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/comment/views.py#L19)
+  - Отзыв на размещенное объявление: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/api_v1/comment/views.py#L19)
+  - Сборка проекта в докер-образ: [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/docker-compose.yml)
+  - Настройка логгера(терминал): [реализация](https://github.com/kolyaslow/test_task_InlyIT/blob/master/core/config.py#L8)
+
 ## Документация
 
 
