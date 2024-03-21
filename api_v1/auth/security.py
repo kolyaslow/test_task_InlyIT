@@ -52,6 +52,9 @@ class AccessRights:
         cookie: str | None = Depends(cookie_check),
         session: AsyncSession = Depends(db_helper.session_dependency),
     ) -> User:
+        if not cookie:
+            raise self._FORBIDDEN_EXCEPTION
+
         user_data: User = await self._get_authorized_user(
             cookie=cookie,
             session=session,

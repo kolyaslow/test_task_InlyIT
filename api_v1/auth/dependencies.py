@@ -24,7 +24,8 @@ async def check_unique_user_name(
     ):
         logging.info(f"Re-creating a user with the name {user_data.user_name}")
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail="Such a user already exists"
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="REGISTER_USER_ALREADY_EXISTS",
         )
 
     return user_data

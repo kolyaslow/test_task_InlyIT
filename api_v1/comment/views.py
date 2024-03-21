@@ -13,7 +13,7 @@ router = APIRouter(prefix="/comment", tags=["Comment"])
 
 
 @router.post(
-    "/create_comment/{announcement_id}",
+    "/create_comment/{id_announcement}",
     status_code=status.HTTP_201_CREATED,
 )
 async def create_comment(

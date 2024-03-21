@@ -10,11 +10,11 @@ from ..common.dependencies import get_item_by_id
 
 
 async def get_comment_by_id(
-    id: Annotated[int, Path],
+    id_comment: Annotated[int, Path],
     session: AsyncSession = Depends(db_helper.session_dependency),
 ) -> Comment:
     return await get_item_by_id(
-        id=id,
+        id=id_comment,
         session=session,
         model_item=Comment,
     )

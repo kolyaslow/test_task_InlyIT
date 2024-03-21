@@ -25,7 +25,7 @@ async def set_user_an_admin(
     await admin_crud.set_user_an_admin(new_admin_data=new_admin_data, session=session)
 
 
-@router.patch(
+@router.delete(
     "/delete_comment/{id_comment}",
     dependencies=[Depends(access_rights.checking_superuser)],
     status_code=status.HTTP_204_NO_CONTENT,
