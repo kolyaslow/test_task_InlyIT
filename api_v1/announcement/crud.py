@@ -1,4 +1,4 @@
-from sqlalchemy import funcfilter, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.models import Announcement
@@ -47,18 +47,3 @@ async def get_not_user_ads(
     announcements = await session.scalars(stmt)
 
     return list(announcements)
-
-
-async def get_announcement_by_id(
-    id: int,
-    session: AsyncSession,
-) -> Announcement | None:
-    return await session.get(Announcement, id)
-
-
-async def delete_announcement(
-    session: AsyncSession,
-    delete_data: Announcement,
-):
-    await session.delete(delete_data)
-    await session.commit()

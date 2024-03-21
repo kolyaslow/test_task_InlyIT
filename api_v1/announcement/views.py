@@ -5,6 +5,7 @@ from core.db_helper import db_helper
 from core.models import Announcement, User
 
 from ..auth.security import access_rights
+from ..common import crud as common_crud
 from . import crud as announcement_crud
 from .dependencies import get_announcement_by_id
 from .schemas import CreateAnnouncement, ShowAnnouncement, TypeAnnouncement
@@ -93,7 +94,7 @@ async def delete_announcement(
             detail="Attempting to delete an ad that is not your own",
         )
 
-    await announcement_crud.delete_announcement(
-        delete_data=delete_data,
+    await common_crud.delete_db_item(
+        delete_item=delete_data,
         session=session,
     )

@@ -11,9 +11,13 @@ class TypeComment(str, Enum):
 
 class BaseComment(BaseModel):
     type: TypeComment = TypeComment.comment
-    announcement_id: int
+    # announcement_id: int
     text: str
 
 
 class CreateComment(BaseComment):
     pass
+
+
+class ShowComment(BaseComment):
+    id: int

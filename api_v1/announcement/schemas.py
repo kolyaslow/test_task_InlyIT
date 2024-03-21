@@ -20,4 +20,5 @@ class CreateAnnouncement(BaseAnnouncement):
 
 
 class ShowAnnouncement(BaseAnnouncement):
+    id: int
     user_id: int

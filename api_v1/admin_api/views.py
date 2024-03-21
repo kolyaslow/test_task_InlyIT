@@ -5,8 +5,8 @@ from core.db_helper import db_helper
 from core.models import Comment, User
 
 from ..auth.security import access_rights
-from ..comment import crud as comment_crud
 from ..comment.dependencies import get_comment_by_id
+from ..common import crud as common_crud
 from . import crud as admin_crud
 from .dependencies import get_user_by_id
 
@@ -34,4 +34,7 @@ async def delete_comment(
     comment: Comment = Depends(get_comment_by_id),
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    await comment_crud.delete_comment(session=session, comment_data=comment)
+    await common_crud.delete_db_item(
+        session=session,
+        delete_item=comment,
+    )
