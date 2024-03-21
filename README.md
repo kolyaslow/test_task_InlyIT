@@ -590,7 +590,7 @@ none
 </td>
   </tr>
 </table>
-
+</details>
 
 <details>
 
@@ -639,7 +639,7 @@ none
   </tr>
 </table>
 </details>
-</details>
+
 
 
 ## Автор
